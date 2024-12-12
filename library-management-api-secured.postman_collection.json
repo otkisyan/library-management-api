@@ -1,0 +1,358 @@
+{
+	"info": {
+		"_postman_id": "7e93fa90-b3a8-421b-abeb-262d76e8b8a7",
+		"name": "library-management-api-secured",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26120236"
+	},
+	"item": [
+		{
+			"name": "localhost:8082/books",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJZckNmQ21zNmNmTzZyUC1TNmpyRmVXVDJLd1YwSnBGMGpIdGVicjhZdEljIn0.eyJleHAiOjE3MzM1MDkzNDQsImlhdCI6MTczMzUwOTA0NCwianRpIjoiOWRlODI3MjMtM2YyOC00ZjY1LTg3YjQtMjkyMzQyMDYyOGNmIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDg5L3JlYWxtcy9saWJyYXJ5LW1hbmFnZW1lbnQtYXBpIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjcxYjkwZDAzLWFiMTItNGRmYy04MjJjLWE3YmJkZDJkYmRjNCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImdhdGV3YXkiLCJzaWQiOiJlMmRlM2Y4ZC01Nzg0LTQzYmUtODcwZS0yMGYzMDE3MjEzN2EiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6ODA4NSJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJST0xFX0FETUlOIiwiZGVmYXVsdC1yb2xlcy1saWJyYXJ5LW1hbmFnZW1lbnQtYXBpIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwaG9uZSBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJRIFdlcnQiLCJwaG9uZV9udW1iZXIiOiIrMzgwMzcyMzciLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJxLndlcnQiLCJnaXZlbl9uYW1lIjoiUSIsImZhbWlseV9uYW1lIjoiV2VydCIsImVtYWlsIjoicS53ZXJAZ21haWwuY29tIn0.MT6jcALP38HFjjqakrdvQlwM5UG8syh0UXH_V5aJqW6e6HHNdiblgr6zP1J_Gu5DGqG7kpiu3kbhmlM1aJ9JNTDc5Y35cXeYfM9WSADJ6OgSL54QhcxYyFB2o1jhKOZDixz0L3coYwdKFXMForAL84_jqNEjE9Wg5M-WqD0HpFiazHyrWTFTpeTzV9makdVoNwxnBK1eBqW2yKmMfMm6BOPwD6BSq3vPKlu5ls-R2jOYcr-acKKy6K82yIE7RcC9o2RLOQKr3M--ZGz5ePF6qrnfGCW3dIrp9a0ATQp-eJaXKf_MfNsgdGYu8vRwbvEVqeNFX9aG3kgc9-XHPWGtxA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8085/books",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8082/books/id/genres",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"mybook\",\n    \"authorId\": \"1\",\n    \"genreIds\": [1, 2] \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/books/4/genres",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"books",
+						"4",
+						"genres"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8082/books/",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJZckNmQ21zNmNmTzZyUC1TNmpyRmVXVDJLd1YwSnBGMGpIdGVicjhZdEljIn0.eyJleHAiOjE3MzM0OTk1NzQsImlhdCI6MTczMzQ5OTI3NCwianRpIjoiNjMzMzFmMTItM2U5YS00M2Q4LWE4NjMtMzViZjc4YzcwOGE3IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDg5L3JlYWxtcy9saWJyYXJ5LW1hbmFnZW1lbnQtYXBpIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjcxYjkwZDAzLWFiMTItNGRmYy04MjJjLWE3YmJkZDJkYmRjNCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImdhdGV3YXkiLCJzaWQiOiI0ZThkODQ1ZC0zOTNjLTQ0MDctOWU5Yi0zNWY0ZTFmZjk2ZDYiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6ODA4NSJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJST0xFX0FETUlOIiwiZGVmYXVsdC1yb2xlcy1saWJyYXJ5LW1hbmFnZW1lbnQtYXBpIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwaG9uZSBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJRIFdlcnQiLCJwaG9uZV9udW1iZXIiOiIrMzgwMzcyMzciLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJxLndlcnQiLCJnaXZlbl9uYW1lIjoiUSIsImZhbWlseV9uYW1lIjoiV2VydCIsImVtYWlsIjoicS53ZXJAZ21haWwuY29tIn0.QE8gC2W1L4y_r1jXlZv6Sq5-Jfm1umtleWt6pZV77pYBZRQt137S2oJoWpKcy-Gyp2afkolmkjISQjqBH6lONXVESApdeuY_DbyAQj6caZB1zKEGaa4-Yq2gZNz9S4QYTMNreUoqt722rwO7b7O1L_tuufv4pW3iG6_4WmrWSKSbljColElBvKUU-Bs7iyNUM59ysZPXGGvMr1Ko0pu0_KvuuY6taM-r3b8M8IwdMr8UJmuChDw-UoBDjdlAcF8g1LJ04Dir5hWqOTEB21aZJiFUuW3up2oDgWLRsrqfIOOD9Xpqsx2YNOqWz3bWd2LghLeGOsKUee7WVmveCTY11w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"best book\",\n    \"authorId\": \"1\",\n    \"genreIds\": [1, 2] \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8085/books",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8082/books/id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"mybook\",\n    \"authorId\": \"1\",\n    \"genreIds\": [1, 2] \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/books/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"books",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8082/books/id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"mybook\",\n    \"authorId\": \"1\",\n    \"genreIds\": [1, 2] \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/books/5",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"books",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Review",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJZckNmQ21zNmNmTzZyUC1TNmpyRmVXVDJLd1YwSnBGMGpIdGVicjhZdEljIn0.eyJleHAiOjE3MzM1MTAzNjMsImlhdCI6MTczMzUxMDA2MywianRpIjoiZTBkZDVhNGUtYzYyMi00NGE0LWE5ZDUtOTk5MDgxNGYyMDgxIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDg5L3JlYWxtcy9saWJyYXJ5LW1hbmFnZW1lbnQtYXBpIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjcxYjkwZDAzLWFiMTItNGRmYy04MjJjLWE3YmJkZDJkYmRjNCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImdhdGV3YXkiLCJzaWQiOiI1NTY4Zjg1MS0wNDRlLTQ0MTYtOTA3NC04Y2NjODJiYTdiYmUiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6ODA4NSJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJST0xFX0FETUlOIiwiZGVmYXVsdC1yb2xlcy1saWJyYXJ5LW1hbmFnZW1lbnQtYXBpIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwaG9uZSBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJRIFdlcnQiLCJwaG9uZV9udW1iZXIiOiIrMzgwMzcyMzciLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJxLndlcnQiLCJnaXZlbl9uYW1lIjoiUSIsImZhbWlseV9uYW1lIjoiV2VydCIsImVtYWlsIjoicS53ZXJAZ21haWwuY29tIn0.Wjd_bJmE176AiIA4zBxMxzwDQkhfsmmwleFTbGAYKZ81o9XQ-wYZ0CYhOrTn3_DrJWPfk5w0LUu5VEAwOHetKuAQCpLJPfoKmJzMy2P9bAbzfMpLN30ra9ek5MqLxdgYp9KGYojpdeny7tp7W1kI-meZYAnvCMzhiP7IXSavUwpiDxg1-8OaitWmryQIGSK-_1Bf_KJ0C8xuUdkT40UV2xOh-ixa4_mcjo4oYScmNM6znqgRpYdQHlodBiXz311826T_hxKKGydL-ZX33oyQEELmSCCE2OkyYJ-KwntlkeqbQJz1bIF5J5lhFZ51mYawMks0VJgMhtNpVpZw7pdRmg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"myreview\",\n    \"rating\": 3,\n    \"bookId\": 4\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8085/reviews",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Review",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"myreview\",\n    \"rating\": 2,\n    \"bookId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8085/reviews/5",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"reviews",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Reviews",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"myreview\",\n    \"rating\": 2,\n    \"bookId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8085/reviews",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Reviews By Book Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"myreview\",\n    \"rating\": 2,\n    \"bookId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8085/reviews/book/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"reviews",
+						"book",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Review By Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"myreview\",\n    \"rating\": 2,\n    \"bookId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8085/reviews/8",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"reviews",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJZckNmQ21zNmNmTzZyUC1TNmpyRmVXVDJLd1YwSnBGMGpIdGVicjhZdEljIn0.eyJleHAiOjE3MzM5OTQ3NjgsImlhdCI6MTczMzk5NDQ2OCwianRpIjoiMmM3ZWIyN2QtOGY3My00MzEyLWIzYTUtNjlhZTkxYWNiYmIxIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDg5L3JlYWxtcy9saWJyYXJ5LW1hbmFnZW1lbnQtYXBpIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjcxYjkwZDAzLWFiMTItNGRmYy04MjJjLWE3YmJkZDJkYmRjNCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImdhdGV3YXkiLCJzaWQiOiI3ODRjNWEzMS02NmVlLTQwNDMtOGQzOS1iYjhmYjQwODI1ZmUiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6ODA4NSJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJST0xFX0FETUlOIiwiZGVmYXVsdC1yb2xlcy1saWJyYXJ5LW1hbmFnZW1lbnQtYXBpIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwaG9uZSBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJRIFdlcnQiLCJwaG9uZV9udW1iZXIiOiIrMzgwMzcyMzciLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJxLndlcnQiLCJnaXZlbl9uYW1lIjoiUSIsImZhbWlseV9uYW1lIjoiV2VydCIsImVtYWlsIjoicS53ZXJAZ21haWwuY29tIn0.QFYF2vlxxl5nOSHtKvJCk5Cj3DyZHg9ufZZu0HkPwZpZFlVMTwlrxz4bgDqtmi77kIDqtvBNuT3Apkn9sQuuwB_XcZ8vD-aOL983CWJP1w19icFbWbjsGa-w1Lk-QBOWHFMqAHR5fqj_5youf-i9qigLqMln0v_tKXDefwQ4XUOemJGiIdLS_3ucNlJNyvk-fN9_iQvyovuLlY4c49Bj9bixxK0ZZ0Pt-T8VWMikF-HgeEYKzDqQb_oMkpYjQPmE4LLYbY4KpwzOIIFWBfYcYKbk9ywgZx_ohdNoHJOxdh7QKugbMa9sLWDTVi0ocRvEJQxnI6eCQ5LIPB6AxtU-Ig",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"john.dof\",\n  \"email\": \"john.doef@example.com\",\n  \"enabled\": true,\n  \"emailVerified\": true,\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"groups\": [\"ADMIN\"],\n  \"credentials\": [{\n    \"type\": \"password\",\n    \"value\": \"password\"\n  }]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8085/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

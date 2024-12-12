@@ -1,0 +1,570 @@
+{
+	"info": {
+		"_postman_id": "166b654e-ee4a-456c-ad86-6872f5615288",
+		"name": "Keycloak",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26120236"
+	},
+	"item": [
+		{
+			"name": "User Auth",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "gateway",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "nlEbYfyCtzk45tnB8J0vLUa8IaxfbEUy",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "q.wert",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "openid phone",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8089/realms/library-management-api/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"realms",
+						"library-management-api",
+						"protocol",
+						"openid-connect",
+						"token"
+					],
+					"query": [
+						{
+							"key": "client_id",
+							"value": "book-service",
+							"disabled": true
+						},
+						{
+							"key": "client_secret",
+							"value": "Y1JotUINlWlmZvP1wDEzavL6JTiBRkVz",
+							"disabled": true
+						},
+						{
+							"key": "username",
+							"value": "q.wert",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"disabled": true
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Token Introspect",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "gateway",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "nlEbYfyCtzk45tnB8J0vLUa8IaxfbEUy",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "y.uip",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJZckNmQ21zNmNmTzZyUC1TNmpyRmVXVDJLd1YwSnBGMGpIdGVicjhZdEljIn0.eyJleHAiOjE3MzM5MDM0OTQsImlhdCI6MTczMzkwMzE5NCwianRpIjoiMjI1NTc1OTktYjVmYy00NjZmLWI5NjItNWUxZDBkY2M0ZGU5IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDg5L3JlYWxtcy9saWJyYXJ5LW1hbmFnZW1lbnQtYXBpIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjcxYjkwZDAzLWFiMTItNGRmYy04MjJjLWE3YmJkZDJkYmRjNCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImdhdGV3YXkiLCJzaWQiOiJhYzUyYzA3My03Mjk2LTRjNTAtYWZmYi05ZGFmMTZmY2FkYWUiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6ODA4NSJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJST0xFX0FETUlOIiwiZGVmYXVsdC1yb2xlcy1saWJyYXJ5LW1hbmFnZW1lbnQtYXBpIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwaG9uZSBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJRIFdlcnQiLCJwaG9uZV9udW1iZXIiOiIrMzgwMzcyMzciLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJxLndlcnQiLCJnaXZlbl9uYW1lIjoiUSIsImZhbWlseV9uYW1lIjoiV2VydCIsImVtYWlsIjoicS53ZXJAZ21haWwuY29tIn0.n4xmVMMs0-jCs25dxK-RrIOYlnN4pi6dJDwOVuuoHWNhCHP-UhAqzXXn9jF9KbEamezbmTlGiAWyJ9coNZHbsBpF9tHMFShGaoZOw9ndh4m0EeVRQMWMCH_gG-ggFrrXaZzSIhE-BKANywhia8tV6Pi57P49umKMWd4q0exdKN0pAs7paMUmJlxN_ARZ5306Kfzs28dPyclXvPXJxIOH3kjI2yEnhFNrFmXcKajGLqW0M2Vx6DW5PjNJm32qAjDvWhF9O9DSXL3aBI0EniogT14ou0o-PjSFj3tQop7Lb-szxX5b-p5Z1M3umKLI0DBjlrBkYZ5D2ZdXWM_aD7bAng",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8089/realms/library-management-api/protocol/openid-connect/token/introspect",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"realms",
+						"library-management-api",
+						"protocol",
+						"openid-connect",
+						"token",
+						"introspect"
+					],
+					"query": [
+						{
+							"key": "client_id",
+							"value": "book-service",
+							"disabled": true
+						},
+						{
+							"key": "client_secret",
+							"value": "Y1JotUINlWlmZvP1wDEzavL6JTiBRkVz",
+							"disabled": true
+						},
+						{
+							"key": "username",
+							"value": "q.wert",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"disabled": true
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "gateway",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "nlEbYfyCtzk45tnB8J0vLUa8IaxfbEUy",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "y.uip",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "grant_type",
+							"value": "refresh_token",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJiYzI5M2ExNC0xODA2LTQ1ZDctOGZkYy05YzRiYzFhNDE1ZTQifQ.eyJleHAiOjE3MzM0MTI1MTksImlhdCI6MTczMzQxMDcxOSwianRpIjoiZDBiMGVkZjctMjg0NC00YzVkLWE4YTEtZmFkMjUyNmE0ZTdjIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDg5L3JlYWxtcy9saWJyYXJ5LW1hbmFnZW1lbnQtYXBpIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo4MDg5L3JlYWxtcy9saWJyYXJ5LW1hbmFnZW1lbnQtYXBpIiwic3ViIjoiYzk3Y2VkMzQtYTM1YS00OGRiLTg0MTEtZDYzNDIxMjlmYmI0IiwidHlwIjoiUmVmcmVzaCIsImF6cCI6ImdhdGV3YXkiLCJzaWQiOiJmOTFiYTcwOC1lZjQ2LTRjZDAtODllOC1mNDliZTc5NzZjZGIiLCJzY29wZSI6ImVtYWlsIHdlYi1vcmlnaW5zIHByb2ZpbGUgcm9sZXMgYmFzaWMgYWNyIn0.A8aiF_FOfRH9fIR36FmJoFs3x86uoMEAIAFvLBbxUkVBp5NR2wCR3i__yAodj56EgVyETNuaIZcGADhqIiNILg",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8089/realms/library-management-api/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"realms",
+						"library-management-api",
+						"protocol",
+						"openid-connect",
+						"token"
+					],
+					"query": [
+						{
+							"key": "client_id",
+							"value": "book-service",
+							"disabled": true
+						},
+						{
+							"key": "client_secret",
+							"value": "Y1JotUINlWlmZvP1wDEzavL6JTiBRkVz",
+							"disabled": true
+						},
+						{
+							"key": "username",
+							"value": "q.wert",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"disabled": true
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Auth Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "HIFbpPCf0LfgpVgbaOYeDK7Y5v8fIyWK",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "test-user",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "test-scope",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8089/realms/medical-center-api/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"realms",
+						"medical-center-api",
+						"protocol",
+						"openid-connect",
+						"token"
+					],
+					"query": [
+						{
+							"key": "client_id",
+							"value": "book-service",
+							"disabled": true
+						},
+						{
+							"key": "client_secret",
+							"value": "Y1JotUINlWlmZvP1wDEzavL6JTiBRkVz",
+							"disabled": true
+						},
+						{
+							"key": "username",
+							"value": "q.wert",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"disabled": true
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Client Auth",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "user-service",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "4zV5bVEbVyzvVH2j4PFeyBa5Wr3Xym2Y",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8089/realms/library-management-api/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"realms",
+						"library-management-api",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Client Auth Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "HIFbpPCf0LfgpVgbaOYeDK7Y5v8fIyWK",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "test-scope",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8089/realms/medical-center-api/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"realms",
+						"medical-center-api",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJZckNmQ21zNmNmTzZyUC1TNmpyRmVXVDJLd1YwSnBGMGpIdGVicjhZdEljIn0.eyJleHAiOjE3MzM5MDU5NDcsImlhdCI6MTczMzkwNTY0NywianRpIjoiNTgyZGEyOGItOTZkOC00MjRmLTgzODctZWUwZDU2NDUxOTNmIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDg5L3JlYWxtcy9saWJyYXJ5LW1hbmFnZW1lbnQtYXBpIiwiYXVkIjpbInJlYWxtLW1hbmFnZW1lbnQiLCJhY2NvdW50Il0sInN1YiI6ImE5NDUwNmUxLTE3YWUtNDQyMC04NmJlLWY2OGEwNzY5MzNiZSIsInR5cCI6IkJlYXJlciIsImF6cCI6InVzZXItc2VydmljZSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDg0Il0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtbGlicmFyeS1tYW5hZ2VtZW50LWFwaSIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJtYW5hZ2UtdXNlcnMiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiY2xpZW50SG9zdCI6IjE5Mi4xNjguNjUuMSIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC11c2VyLXNlcnZpY2UiLCJjbGllbnRBZGRyZXNzIjoiMTkyLjE2OC42NS4xIiwiY2xpZW50X2lkIjoidXNlci1zZXJ2aWNlIn0.IIFo7if8xuEYBQAKdBtVWmXizSBIYagbSuQ5xXPqEVX_QucnK_W78o2NHewdAa6fz4NRkgAEoukdYqqs9AsUH_iczyumEzYIWvnM-bJHolGguAT6xnLi4oOC42CuibqdX1ba-zGgph2jF01Z3SqEyhPKVgwVFie66FzpYxeWhf6395J137A8PCP4OCPJKRfxwuLJp2jC0F6Pf60kevGAYcU1dB-s5dm1cx0xZhH4plgCsDo0Wre819IEdDByC-XlODm1ytwMu61f1Gn91SDtJTVEjojs0AWP0JSvRRBH4DSfgqnRhdD6wdAp_jfcC0kn2wqPsp8-KsgdgeKbQAgC5w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8089/admin/realms/library-management-api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"admin",
+						"realms",
+						"library-management-api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJZckNmQ21zNmNmTzZyUC1TNmpyRmVXVDJLd1YwSnBGMGpIdGVicjhZdEljIn0.eyJleHAiOjE3MzM5MTk4NDIsImlhdCI6MTczMzkxOTU0MiwianRpIjoiYTMyNzQ4MjUtYTA4OC00YzJjLWJjZTctNzZiODVlMTdjZTQzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDg5L3JlYWxtcy9saWJyYXJ5LW1hbmFnZW1lbnQtYXBpIiwiYXVkIjpbInJlYWxtLW1hbmFnZW1lbnQiLCJhY2NvdW50Il0sInN1YiI6ImE5NDUwNmUxLTE3YWUtNDQyMC04NmJlLWY2OGEwNzY5MzNiZSIsInR5cCI6IkJlYXJlciIsImF6cCI6InVzZXItc2VydmljZSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDg0Il0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtbGlicmFyeS1tYW5hZ2VtZW50LWFwaSIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJtYW5hZ2UtdXNlcnMiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiY2xpZW50SG9zdCI6IjE5Mi4xNjguNjUuMSIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC11c2VyLXNlcnZpY2UiLCJjbGllbnRBZGRyZXNzIjoiMTkyLjE2OC42NS4xIiwiY2xpZW50X2lkIjoidXNlci1zZXJ2aWNlIn0.pgygBJk2G4rEeO0K4fH4RdizGT-p9yHszZUg_mzJnf9fW7OFCnyI4Om5HBjah_yyjJ6GMYGu5Dcuk6SIGWRBDsgYZsD-unKJrMhJhUjXBivNEoTuICyMwsSLAh0h5yvVCV2PitKAC4DxWEaLhdDy9AFm7DIuhX9zPdQAXXtb3ScJXQRQRaWN1DApNVH3SBYsCL2sY2f3DYK8eird1GqugVfhtbRv7EmD2x64MP7FwyPG9F9pi1fu7i_jHWQWrgOZqOBpW_DyVoyufaJURVDXUxwni9cjzYxouvolFonJiAcmXjisRfJj3Ae5q8dy-0HbS3EOrGBJCs8hjdbTVW4oOg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"john.dof\",\n  \"email\": \"john.doef@example.com\",\n  \"enabled\": true,\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"realmRoles\": [\"ROLE_ADMIN\"],\n  \"credentials\": [{\n    \"type\": \"password\",\n    \"value\": \"password\"\n  }]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8089/admin/realms/library-management-api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"admin",
+						"realms",
+						"library-management-api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: user-service
+  security:
+    oauth2:
+      client:
+        registration:
+          user-service:
+            client-id: user-service
+            client-secret: 4zV5bVEbVyzvVH2j4PFeyBa5Wr3Xym2Y
+            authorization-grant-type: client_credentials
+            provider: keycloak
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8089/realms/library-management-api
+            token-uri: http://localhost:8089/realms/library-management-api/protocol/openid-connect/token
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8089/realms/library-management-api
+  datasource:
+    url: jdbc:mariadb://localhost:3306/library
+    username: root
+    password: root
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+server:
+  port: 8084
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
