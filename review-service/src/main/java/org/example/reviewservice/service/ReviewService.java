@@ -2,6 +2,7 @@ package org.example.reviewservice.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.example.reviewservice.config.BookClient;
 import org.example.reviewservice.config.OAuth2TokenService;
 import org.example.reviewservice.dto.BookRatingUpdateEvent;
 import org.example.reviewservice.dto.ReviewRequestDto;
@@ -20,10 +21,11 @@ import java.util.List;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
-    private final RestTemplate restTemplate;
+    // private final RestTemplate restTemplate;
     private final WebClient webClient;
     private final ProducerService producerService;
-    private final OAuth2TokenService oauth2TokenService;
+    // private final OAuth2TokenService oauth2TokenService;
+    private final BookClient bookClient;
 
     public List<Review> getAllReviews() {
         return reviewRepository.findAll();
@@ -39,7 +41,7 @@ public class ReviewService {
     }
 
     public Review saveReview(ReviewRequestDto reviewRequestDto) {
-        checkBookExisting(reviewRequestDto.bookId());
+        checkBookExistingFeign(reviewRequestDto.bookId());
         Review review = Review.builder()
                 .content(reviewRequestDto.content())
                 .rating(reviewRequestDto.rating())
@@ -58,6 +60,13 @@ public class ReviewService {
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .block();
+        if (!Boolean.TRUE.equals(bookExists)) {
+            throw new IllegalArgumentException("Book does not exist");
+        }
+    }
+
+    private void checkBookExistingFeign(Long bookId) {
+        Boolean bookExists = bookClient.bookExistsById(bookId);
         if (!Boolean.TRUE.equals(bookExists)) {
             throw new IllegalArgumentException("Book does not exist");
         }

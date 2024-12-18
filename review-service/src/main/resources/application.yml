@@ -17,6 +17,11 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8089/realms/library-management-api
+  cloud:
+    openfeign:
+      oauth2:
+        enabled: true
+        clientRegistrationId: review-service
   kafka:
     bootstrap-servers: localhost:9094
     consumer:
