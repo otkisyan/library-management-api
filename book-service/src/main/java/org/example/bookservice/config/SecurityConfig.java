@@ -31,8 +31,10 @@ public class SecurityConfig  {
                         jwt.jwtAuthenticationConverter(customJwtAuthenticationConverter)))
                 .authorizeHttpRequests(requests ->
                         requests
-                                .requestMatchers(HttpMethod.GET, "/books").authenticated()
+                                .requestMatchers(HttpMethod.GET, "/books/{bookId}").authenticated()
+                                .requestMatchers(HttpMethod.GET, "/books/{bookId}/similar").authenticated()
                                 .requestMatchers(HttpMethod.GET, "/books/{bookId}/exists").authenticated()
+                                .requestMatchers(HttpMethod.GET, "/books").authenticated()
                                 .requestMatchers(HttpMethod.POST, "/books").authenticated())
                 .sessionManagement(
                         (session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -45,16 +47,16 @@ public class SecurityConfig  {
                 .build();
     }
 
-    @Bean
-    UrlBasedCorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH"));
-        configuration.setAllowCredentials(true);
-        configuration.setAllowedHeaders(
-                Arrays.asList("Authorization", "Cache-Control", "Content-Type", "Origin"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+//    @Bean
+//    UrlBasedCorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+//        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH"));
+//        configuration.setAllowCredentials(true);
+//        configuration.setAllowedHeaders(
+//                Arrays.asList("Authorization", "Cache-Control", "Content-Type", "Origin"));
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
 }

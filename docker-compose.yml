@@ -26,9 +26,11 @@ services:
   postgresql:
     image: docker.io/bitnami/postgresql:latest
     environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - POSTGRESQL_USERNAME=bn_keycloak
-      - POSTGRESQL_DATABASE=bitnami_keycloak
+      POSTGRESQL_DATABASE: $POSTGRESQL_DATABASE
+      POSTGRESQL_USERNAME: $POSTGRESQL_USERNAME
+      POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
+    ports:
+      - 5432:5432
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
   keycloak:
@@ -36,8 +38,14 @@ services:
     ports:
       - "8089:8089"
     environment:
-      - KEYCLOAK_HTTP_PORT=8089
-      - KEYCLOAK_CREATE_ADMIN_USER=true
+      KEYCLOAK_HTTP_PORT: 8089
+      KEYCLOAK_CREATE_ADMIN_USER: true
+      KEYCLOAK_ADMIN: $KEYCLOAK_ADMIN
+      KEYCLOAK_ADMIN_PASSWORD: $KEYCLOAK_ADMIN_PASSWORD
+      KEYCLOAK_DATABASE_HOST: postgresql
+      KEYCLOAK_DATABASE_NAME: $POSTGRESQL_DATABASE
+      KEYCLOAK_DATABASE_USER: $POSTGRESQL_USERNAME
+      KEYCLOAK_DATABASE_PASSWORD: $POSTGRESQL_PASSWORD
     depends_on:
       - postgresql
 volumes:

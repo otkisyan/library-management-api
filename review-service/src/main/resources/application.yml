@@ -6,26 +6,26 @@ spring:
       client:
         registration:
           review-service:
-            client-id: review-service
-            client-secret: l9qvmbZ4lHnHgUBSwVZYEil3J7P4OxqW
-            authorization-grant-type: client_credentials
-            provider: keycloak
+            client-id: ${OAUTH2_CLIENT_REGISTRATION_CLIENT_ID}
+            client-secret: ${OAUTH2_CLIENT_REGISTRATION_CLIENT_SECRET}
+            authorization-grant-type: ${OAUTH2_CLIENT_REGISTRATION_AUTHORIZATION_GRANT_TYPE}
+            provider: ${OAUTH2_CLIENT_REGISTRATION_AUTHORIZATION_PROVIDER}
         provider:
           keycloak:
-            issuer-uri: http://localhost:8089/realms/library-management-api
-            token-uri: http://localhost:8089/realms/library-management-api/protocol/openid-connect/token
+            issuer-uri: ${OAUTH2_PROVIDER_KEYCLOAK_ISSUER_URI}
+            token-uri: ${OAUTH2_PROVIDER_KEYCLOAK_TOKEN_URI}
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8089/realms/library-management-api
+          issuer-uri: ${OAUTH2_RESOURCESERVER_JWT_ISSUER_URI}
   cloud:
     openfeign:
       oauth2:
         enabled: true
         clientRegistrationId: review-service
   kafka:
-    bootstrap-servers: localhost:9094
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
     consumer:
-      group-id: orders-service
+      group-id: review-service
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       auto-offset-reset: earliest
@@ -37,9 +37,9 @@ spring:
       properties:
         "spring.json.type.mapping": "bookRatingUpdateEvent:org.example.reviewservice.dto.BookRatingUpdateEvent"
   datasource:
-    url: jdbc:mariadb://localhost:3306/library
-    username: root
-    password: root
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     generate-ddl: true
     hibernate:
@@ -49,4 +49,4 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE}

@@ -6,28 +6,31 @@ spring:
       client:
         registration:
           user-service:
-            client-id: user-service
-            client-secret: 4zV5bVEbVyzvVH2j4PFeyBa5Wr3Xym2Y
-            authorization-grant-type: client_credentials
-            provider: keycloak
+            client-id: ${OAUTH2_CLIENT_REGISTRATION_CLIENT_ID}
+            client-secret: ${OAUTH2_CLIENT_REGISTRATION_CLIENT_SECRET}
+            authorization-grant-type: ${OAUTH2_CLIENT_REGISTRATION_AUTHORIZATION_GRANT_TYPE}
+            provider: ${OAUTH2_CLIENT_REGISTRATION_AUTHORIZATION_PROVIDER}
         provider:
           keycloak:
-            issuer-uri: http://localhost:8089/realms/library-management-api
-            token-uri: http://localhost:8089/realms/library-management-api/protocol/openid-connect/token
+            issuer-uri: ${OAUTH2_PROVIDER_KEYCLOAK_ISSUER_URI}
+            token-uri: ${OAUTH2_PROVIDER_KEYCLOAK_TOKEN_URI}
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8089/realms/library-management-api
+          issuer-uri: ${OAUTH2_RESOURCESERVER_JWT_ISSUER_URI}
   datasource:
-    url: jdbc:mariadb://localhost:3306/library
-    username: root
-    password: root
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     generate-ddl: true
     hibernate:
       ddl-auto: update
 server:
-  port: 8084
+  port: 8088
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE}
+keycloak:
+  admin:
+    base-url: ${KEYCLOAK_ADMIN_BASE_URL}

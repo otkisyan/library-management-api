@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.userservice.dto.UserRepresentationDto;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -12,18 +13,19 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 @Service
 public class UserService {
 
-    private final String KEYCLOAK_ADMIN_BASE_URL = "http://localhost:8089/admin/realms/library-management-api/users";
+    @Value("${keycloak.admin.base-url}/users")
+    private final String KEYCLOAK_ADMIN_BASE_URL;
     private final WebClient nonLoadBalancedWebClient;
 
-
     public UserService(
-            @Qualifier("nonLoadBalancedWebClient") WebClient nonLoadBalancedWebClient
+            @Qualifier("nonLoadBalancedWebClient") WebClient nonLoadBalancedWebClient,
+            @Value("${keycloak.admin.base-url}/users") String KEYCLOAK_ADMIN_BASE_URL
     ) {
         this.nonLoadBalancedWebClient = nonLoadBalancedWebClient;
+        this.KEYCLOAK_ADMIN_BASE_URL = KEYCLOAK_ADMIN_BASE_URL;
     }
 
     public JsonNode createUser(UserRepresentationDto userRepresentationDto) throws Exception {
-        // Ensure user data is valid
         if (userRepresentationDto == null ||
                 userRepresentationDto.username() == null ||
                 userRepresentationDto.username().isEmpty()) {
@@ -31,22 +33,19 @@ public class UserService {
         }
 
         try {
-            // Send POST request to Keycloak to create the user
             String response = nonLoadBalancedWebClient.post()
                     .uri(KEYCLOAK_ADMIN_BASE_URL)
                     .bodyValue(userRepresentationDto)
                     .retrieve()
                     .bodyToMono(String.class)
-                    .block(); // Block for synchronous result
+                    .block();
 
             if (response == null || response.isEmpty()) {
                 return createNewUserSuccessResponse();
             }
 
-            // Parse the JSON response
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.readTree(response);
-
 
         } catch (WebClientResponseException e) {
             throw e;
@@ -75,7 +74,6 @@ public class UserService {
 //    }
 
     private JsonNode createNewUserSuccessResponse() {
-        // Return an empty object or any response indicating success without content
         return new ObjectMapper().createObjectNode();
     }
 }

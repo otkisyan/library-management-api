@@ -36,4 +36,9 @@ public class Book {
 
     @Column(nullable = true)
     private Double averageRating;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "book", orphanRemoval = true)
+    private Set<BookView> bookViews = new LinkedHashSet<>();
+
 }

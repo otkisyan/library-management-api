@@ -33,25 +33,19 @@ public class UserController {
     @PostMapping
     public ResponseEntity<Object> createNewUser(@RequestBody UserRepresentationDto userRepresentationDto) {
         log.info("Creating new user: {}", userRepresentationDto);
-
         try {
             JsonNode response = userService.createUser(userRepresentationDto);
 
-            // If the response is an empty object, return 201 (Created)
             if (response.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.CREATED).build();
             }
-
-            // If there is content in the response, return it with status 200 (OK)
             return ResponseEntity.ok(response);
         } catch (WebClientResponseException e){
             return ResponseEntity.badRequest().body(handleWebClientException(e));
         } catch (IllegalArgumentException e) {
-            // Handle invalid user data
             return ResponseEntity.badRequest()
                     .body(Map.of("error", e.getMessage()));
         } catch (Exception e) {
-            // Handle unexpected errors
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of(
                             "error", "An unexpected error occurred",

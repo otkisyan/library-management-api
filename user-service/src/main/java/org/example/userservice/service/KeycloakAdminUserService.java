@@ -24,7 +24,6 @@ public class KeycloakAdminUserService {
     private final Keycloak keycloakClient;
     private final String REALM = "library-management-api";
 
-
     public KeycloakAdminUserService(
              Keycloak keycloakClient
     ) {
@@ -32,7 +31,6 @@ public class KeycloakAdminUserService {
     }
 
     public UserRepresentation createUser(UserRepresentationDto userRepresentationDto)  {
-        // Ensure user data is valid
         if (userRepresentationDto == null ||
                 userRepresentationDto.username() == null ||
                 userRepresentationDto.username().isEmpty()) {
@@ -63,7 +61,6 @@ public class KeycloakAdminUserService {
             if (response.getStatus() == 201) {
                 return user;
             } else {
-                // Parse the response body as a JSON map
                 String responseBody = response.readEntity(String.class);
                 ObjectMapper objectMapper = new ObjectMapper();
                 Map<String, Object> responseMap;
