@@ -63,7 +63,48 @@ public class BookService {
      * </pre>
      * where each vector component corresponds to the number of times a user viewed the book.
      * <p>
+     * <p>Example of calculating similarity between books B1 and B3:</p>
+     *
+     * <pre>
+     * \[
+     * \text{sim}(B_1, B_3) = \frac{1 \cdot 0 + 1 \cdot 1 + 1 \cdot 1}{\sqrt{1^2 + 1^2 + 1^2} \times \sqrt{0^2 + 1^2 + 1^2}} = \frac{2}{\sqrt{3} \times \sqrt{2}} \approx 0.816
+     * \]
+     * </pre>
+     *
+     * <p>Table of book views by users:</p>
+     *
+     * <table border="1">
+     *   <thead>
+     *     <tr>
+     *       <th>User</th>
+     *       <th>B1</th>
+     *       <th>B2</th>
+     *       <th>B3</th>
+     *     </tr>
+     *   </thead>
+     *   <tbody>
+     *     <tr>
+     *       <td>U1</td>
+     *       <td>1</td>
+     *       <td>1</td>
+     *       <td>0</td>
+     *     </tr>
+     *     <tr>
+     *       <td>U2</td>
+     *       <td>1</td>
+     *       <td>0</td>
+     *       <td>1</td>
+     *     </tr>
+     *     <tr>
+     *       <td>U3</td>
+     *       <td>1</td>
+     *       <td>1</td>
+     *       <td>1</td>
+     *     </tr>
+     *   </tbody>
+     * </table>
      * The method returns the top N most similar books to the specified book, excluding the book itself.
+     *
      *
      * @param bookId the ID of the target book to find similar books for
      * @param topN the maximum number of similar books to return
