@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: review-service
+  security:
+    oauth2:
+      client:
+        registration:
+          review-service:
+            client-id: ${OAUTH2_CLIENT_REGISTRATION_CLIENT_ID}
+            client-secret: ${OAUTH2_CLIENT_REGISTRATION_CLIENT_SECRET}
+            authorization-grant-type: ${OAUTH2_CLIENT_REGISTRATION_AUTHORIZATION_GRANT_TYPE}
+            provider: ${OAUTH2_CLIENT_REGISTRATION_AUTHORIZATION_PROVIDER}
+        provider:
+          keycloak:
+            issuer-uri: ${OAUTH2_PROVIDER_KEYCLOAK_ISSUER_URI}
+            token-uri: ${OAUTH2_PROVIDER_KEYCLOAK_TOKEN_URI}
+      resourceserver:
+        jwt:
+          issuer-uri: ${OAUTH2_RESOURCESERVER_JWT_ISSUER_URI}
+  cloud:
+    openfeign:
+      oauth2:
+        enabled: true
+        clientRegistrationId: review-service
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    consumer:
+      group-id: review-service
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      auto-offset-reset: earliest
+      properties:
+        spring.json.trusted.packages: "*"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        "spring.json.type.mapping": "bookRatingUpdateEvent:org.example.reviewservice.dto.BookRatingUpdateEvent"
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+server:
+  port: 8083
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE}

@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: review-service
+  cloud:
+    openfeign:
+      oauth2:
+        enabled: true
+        clientRegistrationId: review-service
+  kafka:
+    consumer:
+      group-id: review-service
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      auto-offset-reset: earliest
+      properties:
+        spring.json.trusted.packages: "*"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        "spring.json.type.mapping": "bookRatingUpdateEvent:org.example.reviewservice.dto.BookRatingUpdateEvent"
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+server:
+  port: 8083

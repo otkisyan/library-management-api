@@ -18,13 +18,13 @@ public class OAuth2TokenService {
     private final RestTemplate restTemplate = new RestTemplate();
 
     public String getAccessToken() {
-        String tokenUri = "http://localhost:8089/realms/library-management-api/protocol/openid-connect/token";
+        String tokenUri = "http://xxxx:8089/realms/library-management-api/protocol/openid-connect/token";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("client_id", "review-service");
-        body.add("client_secret", "l9qvmbZ4lHnHgUBSwVZYEil3J7P4OxqW");
+        body.add("client_secret", "xxxxx");
         body.add("grant_type", "client_credentials");
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);

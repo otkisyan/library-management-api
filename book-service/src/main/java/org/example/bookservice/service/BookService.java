@@ -59,7 +59,9 @@ public class BookService {
      * The similarity between two books is computed as the cosine similarity between their respective
      * user view count vectors:
      * <pre>
+     * \[
      * \text{sim}(i, j) = \cos(\vec{i}, \vec{j}) = \frac{\vec{i} \cdot \vec{j}}{\|\vec{i}\|_{2}\cdot \|\vec{j}\|_{2}}
+     * \]
      * </pre>
      * where each vector component corresponds to the number of times a user viewed the book.
      * <p>
@@ -103,8 +105,6 @@ public class BookService {
      *     </tr>
      *   </tbody>
      * </table>
-     * The method returns the top N most similar books to the specified book, excluding the book itself.
-     *
      *
      * @param bookId the ID of the target book to find similar books for
      * @param topN the maximum number of similar books to return
