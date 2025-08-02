@@ -15,7 +15,7 @@ import org.springframework.test.context.DynamicPropertySource;
         TestMariaDbConfig.class
 })
 @ActiveProfiles("ci")
-public class AbstractIntegrationTest {
+public abstract class AbstractIntegrationTest {
 
     @DynamicPropertySource
     public static void properties(DynamicPropertyRegistry registry) {

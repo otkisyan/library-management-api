@@ -34,7 +34,7 @@ services:
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
   keycloak:
-    image: docker.io/bitnami/keycloak:latest
+    image: docker.io/bitnami/keycloak:26.3.2
     ports:
       - "8089:8089"
     environment:

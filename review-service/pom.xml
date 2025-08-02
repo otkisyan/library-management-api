@@ -11,8 +11,8 @@
     <groupId>org.example</groupId>
     <artifactId>review-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>order-service</name>
-    <description>order-service</description>
+    <name>review-service</name>
+    <description>review-service</description>
     <url/>
     <licenses>
         <license/>
