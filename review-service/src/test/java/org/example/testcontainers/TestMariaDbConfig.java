@@ -15,10 +15,6 @@ public class TestMariaDbConfig {
 
     static {
         MARIADB_CONTAINER.start();
-        System.setProperty("spring.datasource.url", MARIADB_CONTAINER.getJdbcUrl());
-        System.setProperty("spring.datasource.username", MARIADB_CONTAINER.getUsername());
-        System.setProperty("spring.datasource.password", MARIADB_CONTAINER.getPassword());
-        System.setProperty("spring.datasource.driver-class-name", "org.mariadb.jdbc.Driver");
     }
 
 

@@ -20,7 +20,6 @@ public abstract class AbstractIntegrationTest {
     @DynamicPropertySource
     public static void properties(DynamicPropertyRegistry registry) {
         String issuerUri = TestKeycloakConfig.KEYCLOAK_CONTAINER.getAuthServerUrl() + "/realms/test-realm";
-        System.out.println(issuerUri);
         registry.add("spring.datasource.url",
                 TestMariaDbConfig.MARIADB_CONTAINER::getJdbcUrl);
         registry.add("spring.datasource.username",

@@ -2,9 +2,6 @@ package org.example.testcontainers;
 
 import dasniko.testcontainers.keycloak.KeycloakContainer;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.testcontainers.utility.MountableFile;
 
 import java.nio.file.Files;
@@ -32,9 +29,9 @@ public class TestKeycloakConfig {
 
     static final  KeycloakContainer KEYCLOAK_CONTAINER =
             new KeycloakContainer("quay.io/keycloak/keycloak:26.3.2")
-                    .withCopyFileToContainer(
-                            MountableFile.forHostPath(REALM_FILE_PATH.toString()),
-                            "/opt/keycloak/data/import/test-realm-export.json");
+            .withCopyFileToContainer(
+                    MountableFile.forHostPath(REALM_FILE_PATH.toString()),
+                    "/opt/keycloak/data/import/test-realm-export.json");
 
 //    static final  KeycloakContainer KEYCLOAK_CONTAINER = new KeycloakContainer("quay.io/keycloak/keycloak:26.3.2")
 //            .withRealmImportFile("test-realm-export.json");

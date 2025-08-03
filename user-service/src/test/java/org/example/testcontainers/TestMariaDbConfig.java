@@ -1,8 +1,6 @@
 package org.example.testcontainers;
 
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MariaDBContainer;
 import org.testcontainers.utility.DockerImageName;
 
@@ -18,4 +16,5 @@ public class TestMariaDbConfig {
     static {
         MARIADB_CONTAINER.start();
     }
+
 }
