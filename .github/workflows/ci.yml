@@ -1,0 +1,87 @@
+name: ci
+on:
+  push:
+    paths:
+      - 'book-service/**'
+      - 'user-service/**'
+      - 'review-service/**'
+      - 'gateway/**'
+      - 'eureka/**'
+      - 'pom.xml'
+  pull_request:
+    paths:
+      - 'book-service/**'
+      - 'user-service/**'
+      - 'review-service/**'
+      - 'gateway/**'
+      - 'eureka/**'
+      - 'pom.xml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        module: [book-service, user-service, review-service, gateway, eureka]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Detect changes
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_SHA_PR: ${{ github.event.pull_request.base.sha }}
+          TARGET_SHA_PR: ${{ github.event.pull_request.head.sha }}
+          BEFORE_SHA: ${{ github.event.before }}
+          CURRENT_SHA: ${{ github.sha }}
+          MODULE: ${{ matrix.module }}
+        run: |
+          echo "CHANGED=false" >> $GITHUB_ENV
+          
+          if [[ "$EVENT_NAME" == "pull_request" ]]; then
+            BASE_SHA=$BASE_SHA_PR
+            TARGET_SHA=$TARGET_SHA_PR
+          else
+            BASE_SHA=$BEFORE_SHA
+            TARGET_SHA=$CURRENT_SHA
+          fi
+          
+          echo "Base SHA: $BASE_SHA"
+          echo "Target SHA: $TARGET_SHA"
+          
+          # If Base_SHA is absent (the first commit or a new branch)
+          if [[ "$BASE_SHA" == "0000000000000000000000000000000000000000" || -z "$BASE_SHA" ]]; then
+          
+          if BASE_SHA=$(git rev-parse "${TARGET_SHA}^" 2>/dev/null); then
+          echo "Found parent commit: $BASE_SHA"
+          else
+          echo "No parent commit found for $TARGET_SHA. Using empty tree."
+          BASE_SHA=$(git hash-object -t tree /dev/null)
+          fi
+          fi
+          
+          echo "Resolved Base SHA: $BASE_SHA"
+          echo "Resolved Target SHA: $TARGET_SHA"
+          
+          if git diff --name-only $BASE_SHA $TARGET_SHA | grep "^$MODULE/"; then
+            echo "CHANGED=true" >> $GITHUB_ENV
+          elif git diff --name-only $BASE_SHA $TARGET_SHA | grep "^pom.xml"; then
+            echo "CHANGED=true" >> $GITHUB_ENV
+          fi
+      - name: Build and Test ${{ matrix.module }}
+        if: env.CHANGED == 'true'
+        run: mvn -pl ${{ matrix.module }} -am clean verify
