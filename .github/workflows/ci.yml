@@ -1,4 +1,4 @@
-name: ci
+name: CI
 on:
   push:
     paths:
@@ -63,7 +63,7 @@ jobs:
           echo "Base SHA: $BASE_SHA"
           echo "Target SHA: $TARGET_SHA"
           
-          # If Base_SHA is absent (the first commit or a new branch)
+          # if BASE_SHA is absent (the first commit, new branch or workflow_dispatch)
           if [[ "$BASE_SHA" == "0000000000000000000000000000000000000000" || -z "$BASE_SHA" ]]; then
           
           if BASE_SHA=$(git rev-parse "${TARGET_SHA}^" 2>/dev/null); then

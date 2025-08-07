@@ -34,6 +34,7 @@ public class SecurityConfig  {
                                 .requestMatchers(HttpMethod.GET, "/books/{bookId}").authenticated()
                                 .requestMatchers(HttpMethod.GET, "/books/{bookId}/similar").authenticated()
                                 .requestMatchers(HttpMethod.GET, "/books/{bookId}/exists").authenticated()
+                                .requestMatchers(HttpMethod.GET, "/books/{bookId}/genres").authenticated()
                                 .requestMatchers(HttpMethod.GET, "/books").authenticated()
                                 .requestMatchers(HttpMethod.POST, "/books").authenticated())
                 .sessionManagement(

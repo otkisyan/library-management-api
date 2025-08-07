@@ -1,5 +1,18 @@
 version: "3.7"
 services:
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: $MARIADB_ROOT_PASSWORD
+      MARIADB_DATABASE: $MARIADB_DATABASE
+      MYSQL_TCP_PORT: 3308
+      MYSQL_UNIX_PORT: 3308
+    ports:
+      - "3308:3308"
+    networks:
+      - library-network
+
   kafka:
     container_name: "bitnami-kafka"
     image: 'bitnami/kafka:latest'
@@ -14,6 +27,9 @@ services:
       - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+    networks:
+      - library-network
+
   kafka-ui:
     container_name: kafka-ui
     image: provectuslabs/kafka-ui:latest
@@ -23,6 +39,9 @@ services:
       DYNAMIC_CONFIG_ENABLED: true
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+    networks:
+      - library-network
+
   postgresql:
     image: docker.io/bitnami/postgresql:latest
     environment:
@@ -33,6 +52,9 @@ services:
       - 5432:5432
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
+    networks:
+      - library-network
+
   keycloak:
     image: docker.io/bitnami/keycloak:26.3.2
     ports:
@@ -46,8 +68,88 @@ services:
       KEYCLOAK_DATABASE_NAME: $POSTGRESQL_DATABASE
       KEYCLOAK_DATABASE_USER: $POSTGRESQL_USERNAME
       KEYCLOAK_DATABASE_PASSWORD: $POSTGRESQL_PASSWORD
+      KEYCLOAK_HOSTNAME: keycloas
     depends_on:
       - postgresql
+    networks:
+      - library-network
+
+  eureka:
+    build:
+      context: ./eureka
+      dockerfile: Dockerfile
+    container_name: eureka-service
+    ports:
+      - "8761:8761"
+    networks:
+      - library-network
+
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: gateway-service
+    env_file:
+      - ./gateway/.env
+    ports:
+      - "8085:8085"
+    depends_on:
+      - eureka
+    networks:
+      - library-network
+
+  book-service:
+    build:
+      context: ./book-service
+      dockerfile: Dockerfile
+    container_name: book-service
+    env_file:
+      - ./book-service/.env
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka
+      - gateway
+      - mariadb
+    networks:
+      - library-network
+
+  review-service:
+    build:
+      context: ./review-service
+      dockerfile: Dockerfile
+    container_name: review-service
+    env_file:
+      - ./review-service/.env
+    ports:
+      - "8083:8083"
+    depends_on:
+      - eureka
+      - gateway
+      - mariadb
+    networks:
+      - library-network
+
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    env_file:
+      - ./user-service/.env
+    container_name: user-service
+    ports:
+      - "8088:8088"
+    depends_on:
+      - eureka
+      - gateway
+      - mariadb
+    networks:
+      - library-network
+
+networks:
+  library-network:
+    driver: bridge
+
 volumes:
   postgresql_data:
     driver: local

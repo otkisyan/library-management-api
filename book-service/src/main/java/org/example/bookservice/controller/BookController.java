@@ -20,7 +20,6 @@ import java.util.Set;
 @RequestMapping("/books")
 public class BookController {
     private final BookService bookService;
-    private final BookRepository bookRepository;
 
     @GetMapping()
     public ResponseEntity<List<Book>> getAllBooks() {

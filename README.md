@@ -28,3 +28,57 @@ This repository hosts a library management microservices application built with 
 - Containerization: Docker, Docker Compose
 - Databases: MariaDB (for book-service and review-service) & PostgreSQL for Keycloak
 - Testing: JUnit, Mockito, Testcontainers
+
+
+## Getting Started
+
+### Prerequisites
+
+- JDK 17+
+- Maven
+- Docker and Docker Compose
+
+### Installation
+
+**Before you start:** Change environment variable values in `.env` file for more security or leave it as it is.
+
+1. Clone the repo
+
+```bash
+> git clone https://github.com/otkisyan/library-management-api.git
+> cd library-management-api
+```
+2. Compile and package the code
+
+```bash
+> mvn clean package
+```
+
+3. Run the Application
+
+```bash
+> docker-compose up -d 
+```
+
+4. Configure Keycloak’s hostname resolution in your development environment.
+
+*/etc/hosts*
+```bash
+127.0.0.1       keycloak
+```
+Alternatively, adjust the Keycloak container settings in `docker-compose.yml` or modify the Keycloak-related properties in each microservice’s `application-dev.yaml` to match your local setup.
+
+This is important for the proper generation of URLs by the Keycloak server, such as the `iss` field in the issued tokens, which must match the hostname the services use to validate tokens.
+
+### Endpoints:
+
+- http://localhost:3308 — MariaDB (user: `root`, password: `$MARIADB_ROOT_PASSWORD`, database: `$MARIADB_DATABASE`)
+- http://localhost:9094 — Kafka
+- http://localhost:8090 — Kafka UI
+- http://localhost:5432 — PostgreSQL (database: `$POSTGRESQL_DATABASE`, user: `$POSTGRESQL_USERNAME`, password: `$POSTGRESQL_PASSWORD`)
+- http://localhost:8089 — Keycloak (user: `$KEYCLOAK_ADMIN`, password: `$KEYCLOAK_ADMIN_PASSWORD`)
+- http://localhost:8761 — Eureka
+- http://localhost:8085 — Gateway Service
+- http://localhost:8082 — Book Service
+- http://localhost:8083 — Review Service
+- http://localhost:8088 — User Service  
